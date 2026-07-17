@@ -15,6 +15,7 @@ Turn your LLM into a full-powered ops assistant — from system monitoring to co
 
 | Category | Capabilities | Status |
 |----------|-------------|--------|
+| **Connectivity** | `ping` health check tool | ✅ Done |
 | **System Probes** | CPU usage, memory status, disk space | Planned |
 | **Docker Observability** | Container listing, log retrieval | Planned |
 | **Ops Control** | Container restart (whitelist-gated), port checking | Planned |
@@ -24,19 +25,49 @@ Turn your LLM into a full-powered ops assistant — from system monitoring to co
 
 - **Language:** Go 1.21+
 - **Protocol:** [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
-- **MCP SDK:** [mcp-go](https://github.com/mark3labs/mcp-go)
+- **MCP SDK:** [mcp-go](https://github.com/mark3labs/mcp-go) v0.56.0
 - **Transport:** Stdio
+
+## 🚀 Quick Start
+
+### Build from source
+
+```bash
+git clone https://github.com/volcano6/mcp-sysbox.git
+cd mcp-sysbox
+go build -o mcp-sysbox .
+```
+
+### Configure with Claude Desktop
+
+Add the following to your Claude Desktop config file (`claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "mcp-sysbox": {
+      "command": "/absolute/path/to/mcp-sysbox"
+    }
+  }
+}
+```
+
+### Available Tools
+
+| Tool | Description |
+|------|-------------|
+| `ping` | Health check — returns `pong` with server metadata (version, Go runtime, OS/Arch, timestamp) |
 
 ## 🚀 Roadmap
 
-- [x] **Phase 1: Project Scaffold & Infrastructure** *(current)*
+- [x] **Phase 1: Project Scaffold & Infrastructure** ✅
+  - [x] Open source essentials (README, LICENSE, .gitignore)
+  - [x] Go module init + mcp-go SDK integration
+  - [x] MCP Server skeleton with Stdio transport
+  - [x] `ping` → `pong` connectivity test tool
 - [ ] **Phase 2: Read-only System Probes** — CPU, Memory, Disk monitoring
 - [ ] **Phase 3: Docker Container Observability** — Status queries, log retrieval
 - [ ] **Phase 4: Secure Execution & Ops Control** — Whitelist validation, port probing, service restart
-
-## 📦 Quick Start
-
-> Coming soon — stay tuned for Phase 1 completion!
 
 ## 📄 License
 
