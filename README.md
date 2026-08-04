@@ -16,7 +16,8 @@ Turn your LLM into a full-powered ops assistant — from system monitoring to co
 | Category | Capabilities | Status |
 |----------|-------------|--------|
 | **Connectivity** | `ping` health check tool | ✅ Done |
-| **System Probes** | CPU usage, memory status, disk space | Planned |
+| **System Probes** | `system_memory` memory usage monitoring | ✅ Done |
+| **System Probes** | CPU usage, disk space | 🔜 Planned |
 | **Docker Observability** | Container listing, log retrieval | Planned |
 | **Ops Control** | Container restart (whitelist-gated), port checking | Planned |
 | **Security** | YAML-based whitelist, controlled execution | Planned |
@@ -26,7 +27,26 @@ Turn your LLM into a full-powered ops assistant — from system monitoring to co
 - **Language:** Go 1.21+
 - **Protocol:** [Model Context Protocol (MCP)](https://modelcontextprotocol.io/)
 - **MCP SDK:** [mcp-go](https://github.com/mark3labs/mcp-go) v0.56.0
+- **System Info:** [gopsutil](https://github.com/shirou/gopsutil) v4 (cross-platform)
 - **Transport:** Stdio
+
+## 📁 Project Structure
+
+```
+mcp-sysbox/
+├── main.go                        # Entry point, server bootstrap
+├── tools/                         # MCP tool definitions & handlers
+│   ├── ping.go                    # ping health-check tool
+│   ├── ping_test.go
+│   ├── memory.go                  # system_memory probe tool
+│   └── memory_test.go
+├── internal/
+│   └── sysinfo/                   # Cross-platform system info layer
+│       ├── memory.go              # Memory status retrieval
+│       └── memory_test.go
+├── go.mod
+└── go.sum
+```
 
 ## 🚀 Quick Start
 
@@ -57,6 +77,7 @@ Add the following to your Claude Desktop config file (`claude_desktop_config.jso
 | Tool | Description |
 |------|-------------|
 | `ping` | Health check — returns `pong` with server metadata (version, Go runtime, OS/Arch, timestamp) |
+| `system_memory` | Memory probe — returns total, used, available memory and usage percentage |
 
 ## 🚀 Roadmap
 
@@ -65,7 +86,10 @@ Add the following to your Claude Desktop config file (`claude_desktop_config.jso
   - [x] Go module init + mcp-go SDK integration
   - [x] MCP Server skeleton with Stdio transport
   - [x] `ping` → `pong` connectivity test tool
-- [ ] **Phase 2: Read-only System Probes** — CPU, Memory, Disk monitoring
+- [ ] **Phase 2: Read-only System Probes**
+  - [x] `system_memory` — memory usage monitoring
+  - [ ] `system_cpu` — CPU usage monitoring
+  - [ ] `system_disk` — disk space monitoring
 - [ ] **Phase 3: Docker Container Observability** — Status queries, log retrieval
 - [ ] **Phase 4: Secure Execution & Ops Control** — Whitelist validation, port probing, service restart
 
