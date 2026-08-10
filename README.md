@@ -17,7 +17,8 @@ Turn your LLM into a full-powered ops assistant — from system monitoring to co
 |----------|-------------|--------|
 | **Connectivity** | `ping` health check tool | ✅ Done |
 | **System Probes** | `system_memory` memory usage monitoring | ✅ Done |
-| **System Probes** | CPU usage, disk space | 🔜 Planned |
+| **System Probes** | `system_cpu` CPU usage monitoring | ✅ Done |
+| **System Probes** | Disk space | 🔜 Planned |
 | **Docker Observability** | Container listing, log retrieval | Planned |
 | **Ops Control** | Container restart (whitelist-gated), port checking | Planned |
 | **Security** | YAML-based whitelist, controlled execution | Planned |
@@ -39,11 +40,15 @@ mcp-sysbox/
 │   ├── ping.go                    # ping health-check tool
 │   ├── ping_test.go
 │   ├── memory.go                  # system_memory probe tool
-│   └── memory_test.go
+│   ├── memory_test.go
+│   ├── cpu.go                     # system_cpu probe tool
+│   └── cpu_test.go
 ├── internal/
 │   └── sysinfo/                   # Cross-platform system info layer
 │       ├── memory.go              # Memory status retrieval
-│       └── memory_test.go
+│       ├── memory_test.go
+│       ├── cpu.go                 # CPU status retrieval
+│       └── cpu_test.go
 ├── go.mod
 └── go.sum
 ```
@@ -78,6 +83,7 @@ Add the following to your Claude Desktop config file (`claude_desktop_config.jso
 |------|-------------|
 | `ping` | Health check — returns `pong` with server metadata (version, Go runtime, OS/Arch, timestamp) |
 | `system_memory` | Memory probe — returns total, used, available memory and usage percentage |
+| `system_cpu` | CPU probe — returns model name, core counts (physical/logical), overall and per-core usage |
 
 ## 🚀 Roadmap
 
@@ -88,7 +94,7 @@ Add the following to your Claude Desktop config file (`claude_desktop_config.jso
   - [x] `ping` → `pong` connectivity test tool
 - [ ] **Phase 2: Read-only System Probes**
   - [x] `system_memory` — memory usage monitoring
-  - [ ] `system_cpu` — CPU usage monitoring
+  - [x] `system_cpu` — CPU usage monitoring
   - [ ] `system_disk` — disk space monitoring
 - [ ] **Phase 3: Docker Container Observability** — Status queries, log retrieval
 - [ ] **Phase 4: Secure Execution & Ops Control** — Whitelist validation, port probing, service restart
