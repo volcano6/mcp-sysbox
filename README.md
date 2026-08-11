@@ -2,6 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Go](https://img.shields.io/badge/Go-1.21+-00ADD8?logo=go&logoColor=white)](https://go.dev)
+[![CI](https://github.com/volcano6/mcp-sysbox/actions/workflows/ci.yml/badge.svg)](https://github.com/volcano6/mcp-sysbox/actions/workflows/ci.yml)
 
 **mcp-sysbox** (Go MCP Ops Server) is a [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server built in Go. It provides LLMs (like Claude) with secure, controlled access to operating system probes and operational control capabilities.
 
