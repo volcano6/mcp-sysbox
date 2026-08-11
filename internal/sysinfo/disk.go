@@ -32,6 +32,11 @@ func GetDiskStatus() ([]DiskPartitionStatus, error) {
 			continue
 		}
 
+		if usage.Total == 0 {
+			// Skip virtual filesystems with no real storage (e.g. macOS autofs)
+			continue
+		}
+
 		results = append(results, DiskPartitionStatus{
 			Device:      p.Device,
 			MountPoint:  p.Mountpoint,
