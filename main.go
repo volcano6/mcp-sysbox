@@ -23,6 +23,7 @@ func main() {
 	s.AddTool(tools.CPUTool(), tools.CPUHandler)
 	s.AddTool(tools.DiskTool(), tools.DiskHandler)
 	s.AddTool(tools.DockerListTool(), tools.DockerListHandler)
+	s.AddTool(tools.DockerInspectTool(), tools.DockerInspectHandler)
 
 	// Start the stdio server
 	if err := server.ServeStdio(s); err != nil {
