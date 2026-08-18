@@ -10,6 +10,23 @@
 
 Turn your LLM into a full-powered ops assistant — from system monitoring to container troubleshooting to controlled operational actions.
 
+## 💡 Why mcp-sysbox?
+
+Giving an AI agent unrestricted shell access is dangerous. **mcp-sysbox** takes a different approach: it exposes only explicit, purpose-built tools through the [Model Context Protocol](https://modelcontextprotocol.io/), so your AI assistant can observe system state and troubleshoot containers **without the risk of arbitrary command execution**.
+
+**Who is it for?**
+
+- **AI/LLM developers** — Connect Claude or any MCP client to real infrastructure data for smarter, context-aware responses.
+- **DevOps & SREs** — Let AI assist with diagnostics: CPU spikes, memory pressure, disk usage, container status, and log analysis.
+- **Self-hosted / Homelab users** — Monitor your Docker host, NAS, or VPS through natural language conversations.
+- **MCP ecosystem builders** — Use it as a reference implementation or extend it with your own system operations tools.
+
+**Design principles:**
+
+- 🔒 **Secure by default** — Read-only probes first; dangerous operations require guard middleware + audit logging (Phase 4 roadmap).
+- 🔌 **Pluggable** — Each tool is an independent module. Add, remove, or customize tools without touching the core.
+- 🌍 **Cross-platform** — Works on Linux, macOS, and Windows thanks to [gopsutil](https://github.com/shirou/gopsutil) and the official Docker Engine SDK.
+
 ## ✨ Features
 
 > 🚧 Under active development
