@@ -3,7 +3,7 @@ module github.com/volcano6/mcp-sysbox
 go 1.25.5
 
 require (
-	github.com/mark3labs/mcp-go v0.57.0
+	github.com/mark3labs/mcp-go v0.58.0
 	github.com/moby/moby/api v1.55.0
 	github.com/moby/moby/client v0.5.1
 	github.com/shirou/gopsutil/v4 v4.26.7
